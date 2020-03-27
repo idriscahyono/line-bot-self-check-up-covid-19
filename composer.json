@@ -1,0 +1,12 @@
+{
+    "name": "idris/botlinedicoding",
+    "authors": [
+        {
+            "name": "idriscahyono",
+            "email": "idriscahyono@gmail.com"
+        }
+    ],
+    "require": {
+        "linecorp/line-bot-sdk": "^4.3"
+    }
+}
