@@ -134,8 +134,8 @@ class Webhook extends Controller
             $profile = $res->getJSONDecodedBody();
 
             // create welcome message
-            $message  = "Salam kenal, " . $profile['displayName'] . "!\n";
-            $message .= "Silakan kirim pesan \"MULAI\" untuk memulai kuis Tebak Kode.";
+            $message  = "Haloo " . $profile['displayName'] . "!\n";
+            $message .= "Silakan ketik \"hai\" untuk memulai self check up covid-19";
             $textMessageBuilder = new TextMessageBuilder($message);
 
             // create sticker message
@@ -172,7 +172,7 @@ class Webhook extends Controller
                 // send question no.1
                 $this->sendQuestion($event['replyToken'], 1);
             } else {
-                $message = 'Silakan kirim pesan "MULAI" untuk memulai kuis.';
+                $message = 'Silakan ketik "hai" untuk memulai self check up covid-19';
                 $textMessageBuilder = new TextMessageBuilder($message);
                 $this->bot->replyMessage($event['replyToken'], $textMessageBuilder);
             }
@@ -189,7 +189,7 @@ class Webhook extends Controller
         $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
 
         // create text message
-        $message = 'Silakan kirim pesan "MULAI" untuk memulai kuis.';
+        $message = 'Silakan ketik "hai" untuk memulai self check up covid-19';
         $textMessageBuilder = new TextMessageBuilder($message);
 
         // merge all message
@@ -207,13 +207,13 @@ class Webhook extends Controller
         $question = $this->questionGateway->getQuestion($questionNum);
 
         // prepare answer options
-        for($opsi = "a"; $opsi <= "d"; $opsi++) {
+        for($opsi = "a"; $opsi <= "b"; $opsi++) {
             if(!empty($question['option_'.$opsi]))
                 $options[] = new MessageTemplateActionBuilder($question['option_'.$opsi], $question['option_'.$opsi]);
         }
 
         // prepare button template
-        $buttonTemplate = new ButtonTemplateBuilder($question['number']."/10", $question['text'], $question['image'], $options);
+        $buttonTemplate = new ButtonTemplateBuilder($question['number']."/8", $question['text'], $options);
 
         // build message
         $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
@@ -230,7 +230,7 @@ class Webhook extends Controller
             $this->userGateway->setScore($this->user['user_id'], $this->user['score']);
         }
 
-        if($this->user['number'] < 10)
+        if($this->user['number'] < 8)
         {
             // update number progress
             $this->userGateway->setUserProgress($this->user['user_id'], $this->user['number'] + 1);
@@ -240,23 +240,23 @@ class Webhook extends Controller
         }
         else {
             // create user score message
-            $message = 'Skormu '. $this->user['score'];
-            $textMessageBuilder1 = new TextMessageBuilder($message);
+            // $message = 'Skormu '. $this->user['score'];
+            // $textMessageBuilder1 = new TextMessageBuilder($message);
 
             // create sticker message
-            $stickerId = ($this->user['score'] < 8) ? 100 : 114;
-            $stickerMessageBuilder = new StickerMessageBuilder(1, $stickerId);
+            // $stickerId = ($this->user['score'] < 8) ? 100 : 114;
+            // $stickerMessageBuilder = new StickerMessageBuilder(1, $stickerId);
 
             // create play again message
             $message = ($this->user['score'] < 8) ?
-                'Wkwkwk! Nyerah? Ketik "MULAI" untuk bermain lagi!':
-                'Great! Mantap bro! Ketik "MULAI" untuk bermain lagi!';
+                'Anda kemungkinan besar tidak terinfeksi oleh COVID-19, Namun anda disarankan untuk tetap tinggal dirumah. Infeksi anda mungkin disebabkan virus selain COVID-19, Oleh karena itu anda tidak perlu dites oleh COVID-19. Meskipun demikian, hindarilah keluar rumah jika memungkinkan. Penyakit anda akan sembuh sendiri dengan cukup makan dan istirahat.Apabila anda mengalami gejala atau mendapatkan informasi baru tentang perjalanan penyakit anda, anda bisa membuka chatbot ini lagi':
+                'Ketik "hai" untuk check up lagi';
             $textMessageBuilder2 = new TextMessageBuilder($message);
 
             // merge all message
             $multiMessageBuilder = new MultiMessageBuilder();
-            $multiMessageBuilder->add($textMessageBuilder1);
-            $multiMessageBuilder->add($stickerMessageBuilder);
+            // $multiMessageBuilder->add($textMessageBuilder1);
+            // $multiMessageBuilder->add($stickerMessageBuilder);
             $multiMessageBuilder->add($textMessageBuilder2);
 
             // send reply message
