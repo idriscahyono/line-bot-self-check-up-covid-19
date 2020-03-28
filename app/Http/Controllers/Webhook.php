@@ -214,15 +214,13 @@ class Webhook extends Controller
         // }
 
         // $options[] = new MessageTemplateActionBuilder($question['option_a'], $question['option_b']);
-        
+        $options= array(
+            new MessageTemplateActionBuilder('YA', 'YA'),
+            new MessageTemplateActionBuilder('TIDAK', 'TIDAK')
+        );
+        $img = 'https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363';
         // prepare button template
-        $buttonTemplate = new ButtonTemplateBuilder(
-            // $question['number']."/8", 
-            // $question['text'], 
-            [ 
-                new MessageTemplateActionBuilder('YA', 'YA'),
-                new MessageTemplateActionBuilder('TIDAK', 'TIDAK'),
-            ]);
+        $buttonTemplate = new ButtonTemplateBuilder($question['number']."/8", $question['text'], $img, $options);
 
         // build message
         $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
