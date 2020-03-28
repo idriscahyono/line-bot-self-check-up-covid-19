@@ -249,7 +249,7 @@ class Webhook extends Controller
 
             // create play again message
 
-            $message = ($this->user['score'] == 0) ?
+            $message = ($this->user['score'] == 8) ?
             'Anda kemungkinan besar terinfeksi oleh COVID-19, Jika gejala kamu ringan, pastikan kamu mengikuti cara isolasi diri di rumah yang benar menurut WHO / Kemenkes selama 14 hari':
             'Ketik "hai" untuk check up lagi';
             $textMessageBuilder1 = new TextMessageBuilder($message);
