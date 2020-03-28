@@ -218,7 +218,7 @@ class Webhook extends Controller
             new MessageTemplateActionBuilder('YA', 'YA'),
             new MessageTemplateActionBuilder('TIDAK', 'TIDAK')
         );
-        $img = 'https://cdn.shopify.com/s/files/1/0379/7669/products/sampleset2_1024x1024.JPG?v=1458740363';
+        $img = 'https://res.cloudinary.com/dnxlxr3pd/image/upload/v1585375919/samples/Image_qhcris.jpg';
         // prepare button template
         $buttonTemplate = new ButtonTemplateBuilder($question['number']."/8", $question['text'], $img, $options);
 
