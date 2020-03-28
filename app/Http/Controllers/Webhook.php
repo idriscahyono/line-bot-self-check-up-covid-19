@@ -166,15 +166,12 @@ class Webhook extends Controller
             if(strtolower($userMessage) == 'hai')
             {
                 // reset score
-                // $this->userGateway->setScore($this->user['user_id'], 0);
+                $this->userGateway->setScore($this->user['user_id'], 0);
                 // update number progress
-                // $this->userGateway->setUserProgress($this->user['user_id'], 1);
+                $this->userGateway->setUserProgress($this->user['user_id'], 1);
                 // send question no.1
-                // $this->sendQuestion($event['replyToken'], 1);
+                $this->sendQuestion($event['replyToken'], 1);
 
-                $message = 'Silakan';
-                $textMessageBuilder = new TextMessageBuilder($message);
-                $this->bot->replyMessage($event['replyToken'], $textMessageBuilder);
             } else {
                 $message = 'Silakan ketik "hai" untuk memulai self check up covid-19';
                 $textMessageBuilder = new TextMessageBuilder($message);
@@ -225,7 +222,7 @@ class Webhook extends Controller
         $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
 
         // send message
-        $response = $this->bot->replyMessage($replyToken, $messageBuilder);
+        $response = $this->bot->replyMessage($replyToken, $buttonTemplate);
     }
 
     private function checkAnswer($message, $replyToken)
