@@ -222,7 +222,7 @@ class Webhook extends Controller
         $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
 
         // send message
-        $response = $this->bot->replyMessage($replyToken, $buttonTemplate);
+        $response = $this->bot->replyMessage($replyToken, $messageBuilder);
     }
 
     private function checkAnswer($message, $replyToken)

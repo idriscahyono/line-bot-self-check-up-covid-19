@@ -29,7 +29,7 @@ class QuestionGateway
             return (array) $question;
         }
 
-        return null;
+        // return null;
     }
 
     function isAnswerEqual(int $number, string $answer)
