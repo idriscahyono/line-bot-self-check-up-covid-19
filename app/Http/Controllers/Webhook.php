@@ -206,14 +206,7 @@ class Webhook extends Controller
     {
         // get question from database
         $question = $this->questionGateway->getQuestion($questionNum);
-
-        // prepare answer options
-        // for($opsi = "a"; $opsi <= "d"; $opsi++) {
-        //     if(!empty($question['option_'.$opsi]))
-        //         $options[] = new MessageTemplateActionBuilder($question['option_'.$opsi], $question['option_'.$opsi]);
-        // }
-
-        // $options[] = new MessageTemplateActionBuilder($question['option_a'], $question['option_b']);
+        
         $options= array(
             new MessageTemplateActionBuilder('YA', 'YA'),
             new MessageTemplateActionBuilder('TIDAK', 'TIDAK')
