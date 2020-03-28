@@ -171,6 +171,10 @@ class Webhook extends Controller
                 $this->userGateway->setUserProgress($this->user['user_id'], 1);
                 // send question no.1
                 $this->sendQuestion($event['replyToken'], 1);
+
+                $message = 'Silakan';
+                $textMessageBuilder = new TextMessageBuilder($message);
+                $this->bot->replyMessage($event['replyToken'], $textMessageBuilder);
             } else {
                 $message = 'Silakan ketik "hai" untuk memulai self check up covid-19';
                 $textMessageBuilder = new TextMessageBuilder($message);
