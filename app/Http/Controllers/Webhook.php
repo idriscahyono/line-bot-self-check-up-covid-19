@@ -240,12 +240,12 @@ class Webhook extends Controller
         }
         else {
             // create user score message
-            // $message = 'Skormu '. $this->user['score'];
-            // $textMessageBuilder1 = new TextMessageBuilder($message);
+            $message = 'Skormu '. $this->user['score'];
+            $textMessageBuilder1 = new TextMessageBuilder($message);
 
             // create sticker message
-            // $stickerId = ($this->user['score'] < 8) ? 100 : 114;
-            // $stickerMessageBuilder = new StickerMessageBuilder(1, $stickerId);
+            $stickerId = ($this->user['score'] < 8) ? 100 : 114;
+            $stickerMessageBuilder = new StickerMessageBuilder(1, $stickerId);
 
             // create play again message
             $message = ($this->user['score'] < 8) ?
@@ -255,8 +255,8 @@ class Webhook extends Controller
 
             // merge all message
             $multiMessageBuilder = new MultiMessageBuilder();
-            // $multiMessageBuilder->add($textMessageBuilder1);
-            // $multiMessageBuilder->add($stickerMessageBuilder);
+            $multiMessageBuilder->add($textMessageBuilder1);
+            $multiMessageBuilder->add($stickerMessageBuilder);
             $multiMessageBuilder->add($textMessageBuilder2);
 
             // send reply message
