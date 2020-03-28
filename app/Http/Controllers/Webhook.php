@@ -217,8 +217,8 @@ class Webhook extends Controller
         
         // prepare button template
         $buttonTemplate = new ButtonTemplateBuilder(
-            $question['number']."/8", 
-            $question['text'], 
+            // $question['number']."/8", 
+            // $question['text'], 
             [ 
                 new MessageTemplateActionBuilder('YA', 'YA'),
                 new MessageTemplateActionBuilder('TIDAK', 'TIDAK'),
