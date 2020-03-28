@@ -207,10 +207,12 @@ class Webhook extends Controller
         $question = $this->questionGateway->getQuestion($questionNum);
 
         // prepare answer options
-        for($opsi = "a"; $opsi <= "b"; $opsi++) {
-            if(!empty($question['option_'.$opsi]))
-                $options[] = new MessageTemplateActionBuilder($question['option_'.$opsi], $question['option_'.$opsi]);
-        }
+        // for($opsi = "a"; $opsi <= "d"; $opsi++) {
+        //     if(!empty($question['option_'.$opsi]))
+        //         $options[] = new MessageTemplateActionBuilder($question['option_'.$opsi], $question['option_'.$opsi]);
+        // }
+
+        $options[] = new MessageTemplateActionBuilder($question['option_a'], $question['option_b']);
 
         // prepare button template
         $buttonTemplate = new ButtonTemplateBuilder($question['number']."/8", $question['text'], $options);
