@@ -215,9 +215,14 @@ class Webhook extends Controller
 
         // $options[] = new MessageTemplateActionBuilder($question['option_a'], $question['option_b']);
         
-
         // prepare button template
-        $buttonTemplate = new ButtonTemplateBuilder($question['number']."/8", $question['text']);
+        $buttonTemplate = new ButtonTemplateBuilder(
+            $question['number']."/8", 
+            $question['text'], 
+            [ 
+                new MessageTemplateActionBuilder('YA', 'YA'),
+                new MessageTemplateActionBuilder('TIDAK', 'TIDAK'),
+            ]);
 
         // build message
         $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
