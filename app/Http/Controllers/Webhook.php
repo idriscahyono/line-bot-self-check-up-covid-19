@@ -166,11 +166,11 @@ class Webhook extends Controller
             if(strtolower($userMessage) == 'hai')
             {
                 // reset score
-                $this->userGateway->setScore($this->user['user_id'], 0);
+                // $this->userGateway->setScore($this->user['user_id'], 0);
                 // update number progress
-                $this->userGateway->setUserProgress($this->user['user_id'], 1);
+                // $this->userGateway->setUserProgress($this->user['user_id'], 1);
                 // send question no.1
-                $this->sendQuestion($event['replyToken'], 1);
+                // $this->sendQuestion($event['replyToken'], 1);
 
                 $message = 'Silakan';
                 $textMessageBuilder = new TextMessageBuilder($message);
