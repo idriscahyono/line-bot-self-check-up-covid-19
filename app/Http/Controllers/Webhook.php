@@ -206,12 +206,12 @@ class Webhook extends Controller
     {
         // get question from database
         $question = $this->questionGateway->getQuestion($questionNum);
-        
+
         $options= array(
             new MessageTemplateActionBuilder('YA', 'YA'),
             new MessageTemplateActionBuilder('TIDAK', 'TIDAK')
         );
-        $img = 'https://res.cloudinary.com/dnxlxr3pd/image/upload/v1585375919/samples/Image_qhcris.jpg';
+        $img = 'https://res.cloudinary.com/dnxlxr3pd/image/upload/v1585376743/samples/Image_fexef6.jpg';
         // prepare button template
         $buttonTemplate = new ButtonTemplateBuilder($question['number']."/8", $question['text'], $img, $options);
 
@@ -240,23 +240,31 @@ class Webhook extends Controller
         }
         else {
             // create user score message
-            $message = 'Skormu '. $this->user['score'];
-            $textMessageBuilder1 = new TextMessageBuilder($message);
+            // $message = 'Skormu '. $this->user['score'];
+            // $textMessageBuilder1 = new TextMessageBuilder($message);
 
             // create sticker message
-            $stickerId = ($this->user['score'] < 8) ? 100 : 114;
-            $stickerMessageBuilder = new StickerMessageBuilder(1, $stickerId);
+            // $stickerId = ($this->user['score'] < 8) ? 100 : 114;
+            // $stickerMessageBuilder = new StickerMessageBuilder(1, $stickerId);
 
             // create play again message
+
+            $message = ($this->user['score'] == 0) ?
+            'Anda kemungkinan besar terinfeksi oleh COVID-19, Jika gejala kamu ringan, pastikan kamu mengikuti cara isolasi diri di rumah yang benar menurut WHO / Kemenkes selama 14 hari':
+            'Ketik "hai" untuk check up lagi';
+            $textMessageBuilder1 = new TextMessageBuilder($message);
+
             $message = ($this->user['score'] < 8) ?
                 'Anda kemungkinan besar tidak terinfeksi oleh COVID-19, Namun anda disarankan untuk tetap tinggal dirumah. Infeksi anda mungkin disebabkan virus selain COVID-19, Oleh karena itu anda tidak perlu dites oleh COVID-19. Meskipun demikian, hindarilah keluar rumah jika memungkinkan. Penyakit anda akan sembuh sendiri dengan cukup makan dan istirahat.Apabila anda mengalami gejala atau mendapatkan informasi baru tentang perjalanan penyakit anda, anda bisa membuka chatbot ini lagi':
                 'Ketik "hai" untuk check up lagi';
             $textMessageBuilder2 = new TextMessageBuilder($message);
 
+
+
             // merge all message
             $multiMessageBuilder = new MultiMessageBuilder();
             $multiMessageBuilder->add($textMessageBuilder1);
-            $multiMessageBuilder->add($stickerMessageBuilder);
+            // $multiMessageBuilder->add($stickerMessageBuilder);
             $multiMessageBuilder->add($textMessageBuilder2);
 
             // send reply message
